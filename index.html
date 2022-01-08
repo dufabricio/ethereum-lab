@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Get Balance Sample</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.0-rc.0/web3.min.js"></script>
+
+        <script>
+    
+            if(typeof web3 !== 'undefined'){
+                web3 = new Web3(web3.currentProvider);
+            } else {
+                web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+            }
+    
+            function getBalance(){
+                var address = document.getElementById("address").value;
+    
+                web3.eth.getBalance(address, function(err,res){
+                    var ether = parseFloat(res).toFixed(2);
+                    status += 'Ether: ' + ether + '<br>';
+                    console.log(status);
+                    document.getElementById('status').innerHTML = status;
+    
+                });
+            }
+    
+            </script>
+
+    </head>
+    <body>
+        <h1>Balance</h1>
+        <input type="text" id="address" style="width:300px;" value="0x0Dd0f148c337436577aB7eCeA086Be96E5c85E4f">
+        <button onclick="getBalance()">get Balance</button></br></br>
+        <div id="status" style="color:#00F"></div>
+    </body>
+</html>
